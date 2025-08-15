@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Quote Generator</title>
+    <!-- Use Tailwind CSS for a modern, responsive design -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6; /* Light gray background */
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+
+    <!-- Main container for the quote app -->
+    <div class="bg-white rounded-2xl shadow-xl p-8 max-w-xl w-full text-center">
+
+        <h1 class="text-3xl font-bold text-gray-800 mb-6">Quote of the Moment</h1>
+
+        <!-- Container for the quote content -->
+        <div class="quote-content">
+            <!-- The quote text will be displayed here -->
+            <p id="quote-text" class="text-xl italic text-gray-600 mb-4">
+                "Loading a great quote..."
+            </p>
+            <!-- The author of the quote will be displayed here -->
+            <p id="quote-author" class="text-lg font-semibold text-gray-700">
+                - Author
+            </p>
+        </div>
+
+        <hr class="my-6 border-gray-200">
+
+        <!-- Button to fetch a new quote -->
+        <button id="new-quote-button" class="w-full py-3 px-6 bg-indigo-600 text-white font-bold rounded-lg shadow-lg hover:bg-indigo-700 transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+            Get New Quote
+        </button>
+
+    </div>
+
+    <script>
+        // An array of quotes to display. We are storing these locally to avoid API-related errors.
+        const quotes = [
+            {
+                text: "The only way to do great work is to love what you do.",
+                author: "Steve Jobs"
+            },
+            {
+                text: "Life is what happens when you're busy making other plans.",
+                author: "John Lennon"
+            },
+            {
+                text: "Get busy living or get busy dying.",
+                author: "Stephen King"
+            },
+            {
+                text: "The future belongs to those who believe in the beauty of their dreams.",
+                author: "Eleanor Roosevelt"
+            },
+            {
+                text: "The greatest glory in living lies not in never falling, but in rising every time we fall.",
+                author: "Nelson Mandela"
+            }
+        ];
+
+        // Get references to the HTML elements we will interact with
+        const quoteTextElement = document.getElementById('quote-text');
+        const quoteAuthorElement = document.getElementById('quote-author');
+        const newQuoteButton = document.getElementById('new-quote-button');
+
+        // Function to select and display a random quote from our local array
+        const displayRandomQuote = () => {
+            // Select a random index from the quotes array
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            const quote = quotes[randomIndex];
+
+            // Update the HTML elements with the new quote and author
+            quoteTextElement.textContent = `"${quote.text}"`;
+            quoteAuthorElement.textContent = `- ${quote.author}`;
+        };
+
+        // Add an event listener to the button to call the display function on click
+        newQuoteButton.addEventListener('click', displayRandomQuote);
+
+        // Display a quote automatically when the page loads
+        displayRandomQuote();
+    </script>
+
+</body>
+</html>
